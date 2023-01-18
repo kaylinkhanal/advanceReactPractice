@@ -4,6 +4,7 @@ import "./App.css"
 import NavBar from './components/navbar';
 import Home from "./containers/home"
 import Login from "./containers/login"
+import PlayGround from "./containers/playground"
 
 const App=(props)=> {
   return (
@@ -11,6 +12,7 @@ const App=(props)=> {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/playground" element={<PlayGround />} />
     </Routes>
     </>
   )
