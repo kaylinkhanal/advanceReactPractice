@@ -5,14 +5,16 @@ const PlayGround = ()=>{
     //splittedWinningNameArr will be [ 'r', 'h', 'i', 'n', 'o', 'c', 'e', 'r', 'o', 'u', 's' ]
     const [inputCharacters, setInputCharacters] =  useState('')
     const [allEnteredChar, setAllEnteredChar] = useState([])
-    const [wrongCount, setWrongCount] = useState(0)
+    const [wrongList, setWrongList] = useState([])
     const triggerSubmit = ()=> {
         const bckUpList = [...allEnteredChar]
         const firstLetter = inputCharacters[0]
         if (splittedWinningNameArr.includes(firstLetter)){
           
         }else{
-            setWrongCount(wrongCount+1)
+            const bckUpWrongList = [...wrongList]
+            bckUpWrongList.push(firstLetter)
+            setWrongList(bckUpWrongList)
         }
         bckUpList.push(inputCharacters[0])
         setAllEnteredChar(bckUpList)
@@ -30,10 +32,10 @@ const PlayGround = ()=>{
             return <li>{item}</li>
         })}
         <br/>
-        {wrongCount}
+        {wrongList.length}
 
-        {hangingImageArr.map((item)=>{
-            return(<h1>{item}</h1>)
+        {wrongList.map((item,id)=>{
+            return(<h1>{hangingImageArr[id]}</h1>)
         })}
         </>
     )
