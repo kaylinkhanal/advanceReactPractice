@@ -1,6 +1,6 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 const PlayGround = ()=>{
-    const winningName = 'rhinocerous'
+    const winningName = 'cat'
     const splittedWinningNameArr = winningName.split('')
     //splittedWinningNameArr will be [ 'r', 'h', 'i', 'n', 'o', 'c', 'e', 'r', 'o', 'u', 's' ]
     const [inputCharacters, setInputCharacters] =  useState('')
@@ -19,6 +19,22 @@ const PlayGround = ()=>{
         bckUpList.push(inputCharacters[0])
         setAllEnteredChar(bckUpList)
     }
+    //first render
+    //get api 
+
+    useEffect(()=>{
+        let matchedCount = 0;
+        allEnteredChar.map((item, id) => {
+          if (splittedWinningNameArr.includes(item)) {
+            matchedCount = matchedCount + 1;
+          }
+        });
+        if(splittedWinningNameArr.length ===matchedCount){
+            alert("hurray you won")
+        }
+    },[allEnteredChar])
+
+    
 
     const hangingImageArr = ['O', ['/','|', '\\'], '|', ['/', '\\']]
     return (
@@ -29,7 +45,7 @@ const PlayGround = ()=>{
        {allEnteredChar}
      
         {splittedWinningNameArr.map(item=>{
-            return <li>{item}</li>
+            return <li>{allEnteredChar.includes(item) ? item : null}</li>
         })}
         <br/>
         {wrongList.length}
